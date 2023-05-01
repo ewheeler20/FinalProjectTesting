@@ -1,0 +1,42 @@
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+
+<body>
+
+    <%- include("./partials/nav.ejs") %>
+
+
+<!-- Login forms -->
+<div class="login-form">
+   <div class="container student-login">
+      <h2>Student Login</h2>
+      <img src="graduates.png" width=350px, height=350px alt="Graduates">
+      <form action="/action_page.php">
+         <label for="uname"><b>Username</b></label>
+         <input type="text" placeholder="Enter Username" name="uname" required>
+
+         <label for="psw"><b>Password</b></label>
+         <input type="password" placeholder="Enter Password" name="psw" required>
+
+         <button type="submit">Login</button>
+      </form>
+   </div>
+
+   <div class="container teacher-login">
+      <h2>Teacher Login</h2>
+      <img src="teacher.png" width=350px, height=350px alt="Teacher">
+      <form action="/action_page.php">
+         <label for="uname"><b>Username</b></label>
+         <input type="text" placeholder="Enter Username" name="uname" required>
+
+         <label for="psw"><b>Password</b></label>
+         <input type="password" placeholder="Enter Password" name="psw" required>
+
+         <button type="submit">Login</button>
+      </form>
+   </div>
+</div>
+
+    <%- include("./partials/footer.ejs") %>
+
+</body>

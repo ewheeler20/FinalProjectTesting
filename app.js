@@ -27,7 +27,7 @@ app.use((req, res, next) => {
   });
 
 // routes
-app.get('/index', (req, res) => {
+app.get('/', (req, res) => {
     res.render('index', {title: 'Home'});
   });
 
@@ -43,9 +43,67 @@ app.get('/viewSchedule', (req, res) => {
     res.render('viewSchedule', { title: 'View Courses' });
   });
 
-
-
-
+app.get('/courses', (req, res)=>{
+    Course.find().sort({ createdAt: -1})
+    .then((result)=>{
+      res.render('index', { title: 'Courses', courses: result});
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  })
+  
+  app.post('/courses', (req,res)=>{
+    console.log(req.body)
+    const course = new Course(req.body)
+    course.save()
+      .then((result)=>{
+        res.redirect("/viewSchedule")
+      })
+      .catch((err)=>{
+        console.log(err)
+      })  
+    });
+  
+  app.get('/courses/create', (req, res) => {
+    res.render('create', { title: 'Create a new course'});
+  } );
+  
+  app.get('/courses/:id', (req, res) => {
+    const id = req.params.id;
+      Course.findById(id)
+      .then(result => {
+        res.render('details', { course: result, title: 'Course Details' });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+  
+  app.delete('/courses/:id', (req, res) => {
+    const id = req.params.id;
+      
+    Course.findByIdAndDelete(id)
+      .then(result => {
+        res.json({ redirect: '/courses' });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+  
+  app.post('/courses/:id', (req, res) => {
+    const id = req.params.id;
+    //const { courseName, subjectArea, creditHours, description } = 
+    console.log(req.body);
+    Course.findByIdAndUpdate(id, req.body, { new: true })
+    .then(updatedCourse => {
+      res.redirect('/courses/' + updatedCourse.id);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  });
 
 
 

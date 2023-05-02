@@ -1,8 +1,23 @@
 <html lang="en">
+  <% var coursesList = coursesList || [] %>
+
 <%- include("./partials/head.ejs") %>
 
     <body>
         <%- include("./partials/nav.ejs") %>
+
+          <%coursesList.forEach(course => {%>
+            <p><%= course.courseTitle%></p>
+            <p><%= course.courseDescription%></p>
+            <p><%= course.subjectArea%></p>
+            <p><%= course.credits%></p>
+        <%})%>
+          
+          <!--Courses list check. Coming up empty. -->
+        <% console.log(coursesList) %>
+        <% coursesList.forEach(course => {%>
+            <p><%= course.courseTitle%></p>
+        <%})%>
         
 
         <%- include("./partials/footer.ejs") %>

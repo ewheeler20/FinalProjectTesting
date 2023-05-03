@@ -68,7 +68,8 @@ app.get('/courses', (req, res)=>{
   app.get('/courses/create', (req, res) => {
     res.render('create', { title: 'Create a new course'});
   } );
-  
+
+  //search
   app.get('/courses/:id', (req, res) => {
     const id = req.params.id;
       Course.findById(id)
@@ -79,7 +80,8 @@ app.get('/courses', (req, res)=>{
         console.log(err);
       });
   });
-  
+
+  //delete
   app.delete('/courses/:id', (req, res) => {
     const id = req.params.id;
       

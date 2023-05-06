@@ -8,17 +8,29 @@ of something similar to a project
 in the book. The videos help explain
 and show why it is set up the way it is.
 The files I made so far are not all
-fully functional though.
+fully functional though. I'm not sure 
+if it is being affected at all by other
+files as well because I haven't isolated
+the files and tested it yet but most of the
+backend was working. It seems to be the
+grabbing of the data and transferring to
+the front end that doesn't work because
+you can see it when you request it in
+the back but not when you print it out
+on the page. This is the same problem
+that we were struggling with before.
 Problems:
--Can post on the back-end but won't
+-Can post/add course on the back-end but won't
 display on the front-end.
--Add course page won't actually add
+-Add course page button won't actually add
 the course. If we go this route then
 we will probably be able to put the
 functionality into the page Caleb
 styled. 
 -Delete page dropdown isn't filling
-with the courses.
+with the courses. We could probably
+change the format of how this is set
+up.
 
 I feel as though if we all watch
 through the videos, then we will

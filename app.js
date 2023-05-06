@@ -2,23 +2,31 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Course = require('./models/course');
-var router = express.Router();
-var path = __dirname + '/views/';
+const bodyParser = require("body-parser")
+var cors = require("cors")
+
+
+
 
 // express app
 const app = express();
+app.use(cors())
+app.use(bodyParser.json())
+app.use(morgan('combined'))
 
-// connect to mongodb & listen for requests
-const dbURI = "mongodb+srv://ewheeler18:databasepassword@courses.lgc6iqc.mongodb.net/?retryWrites=true&w=majority";
+const router = express.Router();
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => app.listen(3000))
-  .catch((err) => console.log(err));
+app.use("/api", router)
+
+app.listen(process.env.PORT || 3000)
+
+
 
 // register view engine
 app.set('view engine', 'ejs');
 
 // middleware & static files
+
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
@@ -43,28 +51,36 @@ app.get('/viewSchedule', (req, res) => {
     res.render('viewSchedule', { title: 'View Courses' });
   });
 
-app.get('/courses', (req, res)=>{
-    Course.find().sort({ createdAt: -1})
-    .then((result)=>{
-      res.render('index', { title: 'Courses', courses: result});
+router.get("/courses", (req, res) => {
+  Course.find()
+    .then(courses => {
+      res.json(courses)
     })
-    .catch((err)=>{
-      console.log(err);
-    })
+    .catch(err => {
+      res.status(400).send(err)
   })
-  
-  app.post('/courses', (req,res)=>{
-    console.log(req.body)
-    const course = new Course(req.body)
-    course.save()
-      .then((result)=>{
-        res.redirect("/viewSchedule")
-      })
-      .catch((err)=>{
-        console.log(err)
-      })  
-    });
-  
+})
+
+router.post('/courses', (req, res) => {
+  const course = new Course(req.body);
+  course.save()
+    .then(savedCourse => res.status(200).json(savedCourse))
+    .catch(err => res.status(400).send(err));
+});
+
+////
+ // app.post('/courses', (req,res)=>{
+  //  console.log(req.body)
+  //  const course = new Course(req.body)
+ //   course.save()
+  //    .then((result)=>{
+   //     res.redirect("/viewSchedule")
+    //  })
+    //  .catch((err)=>{
+    //    console.log(err)
+    //  })  
+  //  });
+  /////
   app.get('/courses/create', (req, res) => {
     res.render('create', { title: 'Create a new course'});
   } );

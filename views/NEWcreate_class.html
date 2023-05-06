@@ -1,0 +1,127 @@
+<!-- These are new files I have made
+while following along to professor 
+Hamby's videos. I watched through
+the first 4 and I believe the
+next one is about authentication.
+The videos walk you through the steps
+of something similar to a project
+in the book. The videos help explain
+and show why it is set up the way it is.
+The files I made so far are not all
+fully functional though.
+Problems:
+-Can post on the back-end but won't
+display on the front-end.
+-Add course page won't actually add
+the course. If we go this route then
+we will probably be able to put the
+functionality into the page Caleb
+styled. 
+-Delete page dropdown isn't filling
+with the courses.
+
+I feel as though if we all watch
+through the videos, then we will
+all be on the same page on what each
+page/process should look or do and we
+can help each other out. I think we will
+also be able to communicate better
+with professor Hamby if we are still
+not understanding it. He made an
+announncement about the videos not
+necessarily being a full rewrite but
+could help. I think watching the
+videos was beneficial to me in just
+understanding the project.Look 
+through the files and watch the 
+videos and let me know your thoughts.
+The videos are really long but 1.5
+speed helps.
+
+The file names have NEW in front so
+they aren't going to work. If we choose
+to use it, we can add onto it and change
+the name. I followed along with the videos
+so I used VS code. I haven't tried doing
+it in replit. You could probably copy the
+file format and then copy the code into
+the files and work with it on VS code. 
+Like I said, I do have some errors, but
+we all would have a better idea of how 
+to go about it.
+
+ -->
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Course</title>
+    </head>
+
+    <body>
+        
+        <form>
+          <div>
+            <h1>Add Course</h1>
+                <div>
+                    <label for="courseTitle">Course name </label>
+                    <input type="text" id="courseTitle" name="courseTitle" required>
+                </div>
+                <div>
+                    <label for="subjectArea">Subject area:</label>
+                    <input type="text" id="subjectArea" name="subjectArea" required>
+                </div>
+                <div>
+                    <label for="credits">Credit hours:</label>
+                    <input type="text" id="credits" name="credits" required>
+                </div>
+                <div>
+                    <label for="courseDescription">Course Description:</label>
+                    <input type="text" id="courseDescription" name="courseDescription" required></textarea><br>
+                </div>
+                <div>
+                    <input type="button" id="addBtn" value="Add">
+                    
+                </div>
+
+                <div id="error"></div>
+        </form>
+        
+
+        <script>
+            addEventListener("DOMContentLoaded", function(){
+                document.querySelector("addBtn").addEventListener("click",addCourse)
+            })
+
+            async function addCourse(){
+                const course = {
+                    courseTitle: document.querySelector("#courseTitle").value,
+                    subjectArea: document.querySelector("#subjectArea").value,
+                    credits: document.querySelector("#credits").value,
+                    courseDescription: document.querySelector("#courseDescription").value
+                }     
+                const response = await fetch("http://localhost:3000/api/courses",{
+                    method: "POST",
+                    headers:{
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(course)
+                });
+
+                if(response.ok){
+                    const results = await response.json();
+                    alert("Add course with ID" + results._id);
+                    //clear the form of data
+                    document.querySelector("form").reset();
+                }
+                else{
+                    document.querySelector("#error").innerHTML = "Cannot add a course.";
+                }
+            }
+        </script>
+        <!-- <%- include("./partials/footer.ejs") %> -->
+    </body>
+</html>
+ 

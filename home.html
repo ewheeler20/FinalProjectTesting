@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="final_project.css" />
+  </head>
+  <body>
+    <!--Navigation bar-->
+    <div class="navbar">
+      <a href="home.html" class="active">Home</a>
+      <a href="view_schedule.html">View Schedule</a>
+      <a href="add_drop.html">Add/Drop Classes</a>
+      <a href="create_course.html">Create/Edit/Delete Courses</a>
+    </div>
+    <!-- Login forms -->
+    <div class="login-form">
+      <div class="container student-login">
+        <h2>Student Login</h2>
+        <img
+          src="graduates.png"
+          width="350px,"
+          height="350px"
+          alt="Graduates"
+        />
+        <form action="/action_page.php">
+          <label for="uname"><b>Username</b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="uname"
+            required
+          />
+
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <div class="container teacher-login">
+        <h2>Teacher Login</h2>
+        <img src="teacher.png" width="350px," height="350px" alt="Teacher" />
+        <form action="/action_page.php">
+          <label for="uname"><b>Username</b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="uname"
+            required
+          />
+
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

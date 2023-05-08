@@ -61,7 +61,7 @@ the files and work with it on VS code.
 Like I said, I do have some errors, but
 we all would have a better idea of how 
 to go about it.
-*/
+
 
 
 const express = require('express');
@@ -142,3 +142,4 @@ router.post('/courses', (req, res) => {
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' });
   });
+*/

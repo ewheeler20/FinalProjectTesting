@@ -60,7 +60,7 @@ file format and then copy the code into
 the files and work with it on VS code. 
 Like I said, I do have some errors, but
 we all would have a better idea of how 
-to go about it. */
+to go about it. 
 
 
 
@@ -70,3 +70,4 @@ mongoose.connect("mongodb+srv://ewheeler18:databasePassword@courses.lgc6iqc.mong
                  {useNewUrlParser: true})
 
 module.exports = mongoose;
+*/

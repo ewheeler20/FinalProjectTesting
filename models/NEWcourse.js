@@ -63,7 +63,7 @@ we all would have a better idea of how
 to go about it. */
 
 
-
+/*
 const db = require("../db")
 
 
@@ -76,3 +76,4 @@ const Course = db.model("Courses",{
 
 
 module.exports = Course;
+*/

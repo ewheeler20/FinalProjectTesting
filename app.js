@@ -5,7 +5,10 @@ const Course = require('./models/course');
 const bodyParser = require("body-parser")
 var cors = require("cors")
 
-
+mongoose.connect("mongodb+srv://ewheeler18:databasePassword@courses.lgc6iqc.mongodb.net/courses?retryWrites=true&w=majority",
+                 {useNewUrlParser: true,
+                 useUnifiedTopology: true }
+                 )
 
 
 // express app

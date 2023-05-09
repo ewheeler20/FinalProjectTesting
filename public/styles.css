@@ -1,8 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
+
+
+
 
 h2{
-  color:black
+  color:black;
+  text-align: left;
 }
-/* Styling for navigation bar */
+
+
 .navbar {
     overflow: hidden;
     background-color: #bbc9f0;
@@ -38,7 +55,7 @@ h2{
   /* Body background color */
   body{
     background-image: linear-gradient(#1d4ed8, #76808f );
-    color: #666666;
+    color: #0d0d0d;
     background-attachment: fixed;
       font-family: Arial;
     position: relative;
@@ -149,7 +166,82 @@ footer{
   .create-course button:hover {
     color: white;
   }
-  
-  
 
+/* Add/Drop page styles */
+.container-add-drop {
+  padding: 20px;
+  background: linear-gradient(to bottom, #3666eb, #b1bfd3);
+  height: 100%;
+}
+h1 {
+  text-align: center;
+}
+form {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin-top: 10px;
+  color: #0e2463;
+}
+input {
+  width: 60%;
+  padding: 8px;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+button[type="submit"] {
+  background-color: #4d5df1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button[type="submit"]:hover {
+  background-color: #334155;
+}
+.current-classes-heading {
+  margin-top: 20px;
+  color: #0e2463;
+  padding-bottom: 10px;
+}
+ul {
+  list-style: none;
+}
+.drop-btn {
+  padding-left: 5px;
+}
+  
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+table,
+th,
+td {
+  border: 1px solid #d3d3d3;
+  padding: 10px;
+}
+table th {
+  background-color: #d3d3d3;
+  font-weight: bold;
+}
 
+  
+button[type="submit"]:hover {
+  background-color: #334155;
+}
+.current-classes-heading {
+  margin-top: 20px;
+  color: #0e2463;
+  padding-bottom: 10px;
+}
+ul {
+  list-style: none;
+}
+.drop-btn {
+  padding-left: 5px;
+}

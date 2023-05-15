@@ -1,0 +1,104 @@
+<%- include("./partials/head.ejs") %>
+    <div class="login-forms">
+       <form action="/signup">
+        <h2>Login</h2>
+        <img src="img/graduates.png " width=120px, height=120px alt="Graduates">
+        <label for="username">Username</label>
+        <input type="text" name="username"  />
+        <div class="username error"></div>
+        <label for="password">Password</label>
+        <input type="password" name="password"  />
+        <div class="password error"></div>
+ 
+          <button type="submit">Login</button>
+       </form>
+       
+         <form id="teacher-login" action="/signup">
+          <h2>Login</h2>
+          <img src="img/teacher.png " width=120px, height=120px alt="Teacher">
+          <label for="username">Username</label>
+          <input type="text" name="username"  />
+          <div class="username error"></div>
+          <label for="password">Password</label>
+          <input type="password" name="password"  />
+          <div class="password error"></div>
+   
+            <button type="submit">Login</button>
+         </form>
+    </div>
+    
+  
+  <%- include('partials/footer'); -%>
+  
+  <script>
+    const studentLogin = document.querySelector('form');
+    const teacherLogin = document.getElementById('teacher-login');
+    const usernameError = document.querySelector('.username.error');
+    const passwordError = document.querySelector('.password.error');
+  
+    studentLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      // reset errors
+      usernameError.textContent = '';
+      passwordError.textContent = '';
+  
+      // get values
+      const username = studentLogin.username.value;
+      const password = studentLogin.password.value;
+  
+      try {
+        const res = await fetch('/login', { 
+          method: 'POST', 
+          body: JSON.stringify({ username, password }),
+          headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+          usernameError.textContent = data.errors.username;
+          passwordError.textContent = data.errors.password;
+        }
+        if (data.user) {
+          location.assign('/');
+        }
+  
+      }
+      catch (err) {
+        console.log(err);
+      }
+    });
+
+    teacherLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      // reset errors
+      usernameError.textContent = '';
+      passwordError.textContent = '';
+  
+      // get values
+      const username = teacherLogin.username.value;
+      const password = teacherLogin.password.value;
+  
+      try {
+        const res = await fetch('/login', { 
+          method: 'POST', 
+          body: JSON.stringify({ username, password }),
+          headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+          usernameError.textContent = data.errors.username;
+          passwordError.textContent = data.errors.password;
+        }
+        if (data.user) {
+          location.assign('/');
+        }
+  
+      }
+      catch (err) {
+        console.log(err);
+      }
+    });
+  </script>

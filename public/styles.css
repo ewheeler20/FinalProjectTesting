@@ -16,7 +16,7 @@ html {
 
 h2{
   color:black;
-  text-align: left;
+  text-align: center;
 }
 
 
@@ -50,6 +50,24 @@ h2{
     color: black;
     text-decoration: underline;
   }
+
+  .search_bar {
+    position: top;
+    bottom: 10px;
+    right: 0px;
+    font-size: 12px;
+    width: 200px;
+  }
+
+  .search_bar_word {
+    position: top;
+    bottom: 10px;
+    right: 100px;
+    font-size: 13px;
+    width: 100px;
+  }
+  
+  
   
   
   /* Body background color */
@@ -60,7 +78,64 @@ h2{
       font-family: Arial;
     position: relative;
   }
+ /*Sub Login Forms (I will revert to original form - Arei) */
+.login-forms {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  form h2{
+    font-size: 2.4em;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-align: center;
+  }
   
+  form img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  form{
+    width: 360px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    background: white;
+  }
+
+
+  input{
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+  }
+  label{
+    display: block;
+    margin: 20px 0 10px;
+  }
+  button{
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-radius: 36px;
+    background: #FEE996;
+    border:0;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.8em;
+    display: block;
+    padding: 10px 16px;
+    letter-spacing: 2px;
+  }
+
+  .error{
+    color: #ff0099;
+    margin: 10px 2px;
+    font-size: 0.8em;
+    font-weight: bold;
+  }
   
   /* Login forms */
   .login-form {
@@ -123,6 +198,39 @@ h2{
     margin-left: 20px;
     padding: 10px;
     
+  }
+
+/* header */
+
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: white;
+  }
+ 
+  header ul{
+    display: flex;
+    align-items: center;
+  }
+  header li{
+    margin-left: 20px;
+  }
+ 
+  header li a{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.8em;
+    display: block;
+    padding: 10px 16px;
+    letter-spacing: 2px;
+  }
+
+  ul{
+    list-style-type: none;
+  }
+  a{
+    text-decoration: none;
   }
  
 /* footer */

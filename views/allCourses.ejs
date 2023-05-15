@@ -4,57 +4,54 @@
 
     <body>
         <%- include("./partials/nav.ejs") %>
-
-          
-
-                        <div class="container">
-      <h1>Course Index</h1>
-      <table>
-        <tr>
-          <th>Course Name</th>
-          <th>Course Code</th>
-          <th>Teacher Name</th>
-          <th>Course Details</th>
-          <th>Edit/Delete Course</th>
-        </tr>
-        <tr>
-          <td>Introduction to Computer Science</td>
-          <td>CS101</td>
-          <td>John Smith</td>
-          <td><a href="#" class="change-link">View Details</a></td>
-          <td>
-            <a href="#edit_course" class="change-link">Edit Course/</a
-            ><a href="#delete_course" class="change-link">Delete Course</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Calculus I</td>
-          <td>MATH101</td>
-          <td>Jane Doe</td>
-          <td><a href="#" class="change-link">View Details</a></td>
-          <td>
-            <a href="#edit_course" class="change-link">Edit Course/</a
-            ><a href="#delete_course" class="change-link">Delete Course</a>
-          </td>
-        </tr>
-        <!-- Additional rows for other courses -->
-      </table>
-      </div>
       
-          <h2>All Courses</h2>
+      
+          
+      <div style="padding-top: 25px;" class="container">
+        <h1 style="padding-bottom: 20px;">Course Index</h1>
+              <table>
+                <tr>
+                  <th>Course Name</th>
+                  <th>Course ID</th>
+                  <th>Course Code</th>
+                  <th>Course Details</th>
+                  <th>Credits</th>
+                  <th>Edit/Delete Course</th>
+                </tr>
+              
+          
+            
             <% courses.forEach(course => { %>
-                <!-- <a class="single" href="/courses/<%= course._id %>"> -->
-                <h3 class = "courseTitle"><%= course.courseTitle %></h3>
-                <p class = "subjectArea"><%= course.subjectArea %></p>
-                <p class = "creditHours">Credits: <%= course.credits  %></p>
-                </a>
+                
+              <tr>
+                <td><h3 class = "courseTitle"><%= course.courseTitle %></h3></td>
+                <td><p class = "courseID"> <%= course.id %></p></td>
+                <td><p class = "subjectArea"><%= course.subjectArea %></p></td>
+                <td><a class="single" href="/courses/<%= course._id %>"><p class = "courseDetails">View Details</a></td>
+                <td><p class = "creditHours"> <%= course.credits  %></p></td>
+                
+                <td>
+                  
+                  <form class="form-events" action="/delete" method="post">
+                    <div class ="button">
+                      <a href="/allCourses" class="delete btn"></a>
+                      <button name="deleteBtn" value="<%=course._id%>" type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                    
+                </form>
+                
+                </td>
+              </tr>
+               
             <% }) %> 
-
-           
-       
+            
+          </table>
+          </div>
         
 
         <%- include("./partials/footer.ejs") %>
+
+          
     </body>
 
 </html>

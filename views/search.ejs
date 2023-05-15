@@ -1,0 +1,32 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+    <body>
+        <%- include("./partials/nav.ejs") %>
+
+
+    <div class="courses content">
+        <h2>Search Results</h2><br>
+        <% if (courses.length > 0){ %>
+            <% courses.forEach(course => { %>
+                <table>
+                    <tr>
+                        <td>
+                    <a class="single" href="/courses/<%= course._id %>">
+                    <h3 class = "courseTitle">Course Title: <%= course.courseTitle %></h3><br>
+                    <p class = "subjectArea">Subject Area: <%= course.subjectArea %></p><br>
+                    <p class = "credits">Credits: <%= course.credits  %></p>
+                    </a>
+                        </td>
+                    </tr>
+                </table>
+            <% }) %> 
+        <% } else { %>
+            <p>We're sorry, nothing matches your search.</p>
+        <% } %>
+    </div>
+
+
+<%- include("./partials/footer.ejs") %>
+    </body>
+</html>

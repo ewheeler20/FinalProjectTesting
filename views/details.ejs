@@ -1,0 +1,43 @@
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+
+<body>
+
+    <%- include("./partials/nav.ejs") %>
+
+    
+    <table>
+
+      <div class="details content">
+        <tr>
+          <td><h2><%= course.courseTitle %></h2></td>
+        </tr>
+        <div id = "content">
+        <tr>
+          <td><p>Course ID: <%= course.id %></p></td>
+        </tr>
+        <tr>
+          <td><p>Subject: <%= course.subjectArea %></p></td>
+        </tr>
+        <tr>
+          <td><p>Credits: <%= course.credits %></p></td>
+        </tr>
+        <tr>
+          <td><p>Description: <%= course.courseDescription %></p></td>
+        </tr>
+        </div>
+      </div>
+
+      </table>
+
+
+
+
+
+
+
+      
+<%- include("./partials/footer.ejs") %>
+
+</body>
+</html>

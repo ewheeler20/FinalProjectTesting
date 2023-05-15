@@ -1,11 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const Course = require('./models/course');
 const bodyParser = require("body-parser")
 var cors = require("cors")
 const { result } = require('lodash');
-
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const authRoutes = require('./routes/authRoutes');
 
 const dbURI = "mongodb+srv://ewheeler18:databasePassword@Courses.lgc6iqc.mongodb.net/new";
 
@@ -33,10 +35,21 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
+
 
 
 // routes
-app.get('/allCourses', function(req, res) {
+
+app.get('*', checkUser);
+app.use(authRoutes);
+
+app.get('/',requireAuth, (req, res) => {
+  res.render('index', {title: 'Home'});
+});
+
+app.get('/allCourses', requireAuth, function(req, res) {
   Course.find().sort({createdAt: -1})
   .then((result)=>{
     res.render('allCourses', { 
@@ -50,15 +63,11 @@ app.get('/allCourses', function(req, res) {
 })
 
 
-app.get('/', (req, res) => {
-    res.render('index', {title: 'Home'});
-  });
-
-app.get('/addClasses', (req, res) => {
+app.get('/addClasses',requireAuth, (req, res) => {
     res.render('addClasses', { title: 'Add Classes' });
   });
 
-app.get('/courses/create', (req, res) => {
+app.get('/courses/create',(req, res) => {
     res.render('create', { title: 'Create a New Course' });
   });
 
@@ -66,6 +75,9 @@ app.get('/allCourses', (req, res) => {
     res.render('allCourses', { title: 'View Courses' });
   });
 
+app.get('/shoppingCart',(req, res) => {
+    res.render('shoppingCart', { title: 'Shopping Cart' });
+  });
 
 
 app.post('/courses', (req, res) => {
@@ -108,18 +120,20 @@ app.post('/courses', (req, res) => {
       });
   });
 
+ 
   //delete
-  app.delete('/courses/:id', (req, res) => {
-    const id = req.params.id;
-      
-    Course.findByIdAndDelete(id)
-      .then(result => {
-        res.json({ redirect: '/courses' });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+app.post("/delete", function(req, res){
+  const deletedItemId = req.body.deleteBtn;
+
+  Course.findByIdAndDelete(deletedItemId, function(err){
+    if (!err) {
+      console.log("Successfully deleted");
+      res.redirect('/allCourses');
+    } else {
+      console.log(err);
+    }
   });
+});
   
   app.post('/courses/:id', (req, res) => {
     const id = req.params.id;
@@ -135,8 +149,36 @@ app.post('/courses', (req, res) => {
   });
 
 
+  app.get('/search/:query', async (req, res) => {
+    const allCourses = await Course.find();
+    const query = req.params.query;
+    console.log(query)
+    const courses = []
+    try {
+      allCourses.forEach(course => {
+        if (course.courseTitle.toUpperCase() === query.toUpperCase() || course.subjectArea.toUpperCase() === query.toUpperCase() || course.credits === query) {
+          courses.push(course);
+        }
+      })
+      res.render('search', { title: 'Search results', courses })
+    } catch {
+      res.render('search', { title: 'Search results', courses })
+  
+    }
+  })
 
-  // 404 page
+
+
+  
+
+  app.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    Course.findByID(id)
+      .then(result => {
+        res.render('details', { course: result, title: 'Course Details'});
+      })})
+
+// 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' });
   });
